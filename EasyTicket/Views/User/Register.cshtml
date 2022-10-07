@@ -1,0 +1,87 @@
+﻿@model EasyTicket.Models.RegisterModel
+@using BotDetect.Web.Mvc;
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
+@{MvcCaptcha registerCaptcha = new MvcCaptcha("registerCaptcha");}
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="normal-breadcrumb set-bg" data-setbg="/Assets/Client/img/normal-breadcrumb.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="normal__breadcrumb__text">
+                    <h2>Sign Up</h2>
+                    <p>Welcome to the official EasyTicket.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Normal Breadcrumb End -->
+<!-- Signup Section Begin -->
+<section class="signup spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login__form">
+                    <h3>Sign Up</h3>
+                    @using (Html.BeginForm("Register", "User", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                            @if (ViewBag.Success != null)
+                            {
+                                <div class="alert alert-success">@ViewBag.Success</div>
+                            }
+                        </div>
+                        <div class="input__item">
+                            @Html.TextBoxFor(model => model.Username, new { @placeholder = "Username" })
+                            <span class="icon_profile"></span>
+                            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="input__item">
+                            @Html.TextBoxFor(model => model.Name, new { @placeholder = "Your Name" })
+                            <span class="icon_profile"></span>
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="input__item">
+                            @Html.PasswordFor(model => model.Password, new { @placeholder = "Password" })
+                            <span class="icon_lock"></span>
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="input__item">
+                            @Html.PasswordFor(model => model.ConfirmPassword, new { @placeholder = "ConfirmPassword" })
+                            <span class="icon_lock"></span>
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="input__item">
+                            @Html.TextBoxFor(model => model.Email, new { @placeholder = "Email" })
+                            <span class="icon_mail"></span>
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="input__item">
+                            @Html.Captcha(registerCaptcha)
+                            @Html.TextBox("CaptchaCode")
+                        </div>
+                        <button type="submit" class="site-btn">Register</button>
+                    }
+                    <h5>Already have an account? <a href="/login">Log In!</a></h5>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="login__social__links">
+                    <h3>Login With:</h3>
+                    <ul>
+                        <li>
+                            <a href="#" class="facebook"><i class="fa fa-facebook"></i> Sign in With Facebook</a>
+                        </li>
+                        <li><a href="#" class="google"><i class="fa fa-google"></i> Sign in With Google</a></li>
+                        <li><a href="#" class="twitter"><i class="fa fa-twitter"></i> Sign in With Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

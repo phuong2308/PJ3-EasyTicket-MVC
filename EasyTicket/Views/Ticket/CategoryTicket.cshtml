@@ -1,0 +1,124 @@
+﻿@model List<EasyTicket.Connection.ViewModel.TicketViewModel>
+@{
+    ViewBag.Title = "Product List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var category = (EasyTicket.Connection.EF.Category)ViewBag.CategoryTicket;
+    var listTopHot = (List<EasyTicket.Connection.EF.Ticket>)ViewBag.TicketTopHot;
+}
+
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__links">
+                    <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                    <a href="./categories.html">Categories</a>
+                    <span>@category.Name</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="product-page spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="product__page__content">
+                    <div class="product__page__title">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-6">
+                                <div class="section-title">
+                                    <h4>@category.Name</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <div class="product__page__filter">
+                                    <p>Order by:</p>
+                                    <select>
+                                        <option value="">A-Z</option>
+                                        <option value="">1-10</option>
+                                        <option value="">10-50</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach (var item in Model)
+                        {
+                            var url = "/detail/" + item.MetaTitle + "-" + item.ID;
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="@item.Images">
+                                        <div class="ep">@item.Quantity</div>
+                                        <div class="comment">$@item.Price</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>@item.CategoryName</li>
+                                        </ul>
+                                        <h5><a href="@url">@item.Name</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                @if (ViewBag.TotalPage > 1)
+                {
+                    var pageDisplay = (int)ViewBag.MaxPage;
+                    int totalPage = (int)ViewBag.TotalPage;
+                    int currentPage = ((int)ViewBag.Page);
+
+                    var startPage = Math.Max(1, currentPage - pageDisplay / 2);
+                    var endPage = Math.Min(totalPage, currentPage + pageDisplay / 2);
+                    var link = "/product/" + category.MetaTitle + "-" + category.ID;
+                    <div class="product__pagination">
+                        @if (currentPage > ViewBag.First)
+                        {
+                            <a href="@link?page=@ViewBag.First"><i class="fa fa-angle-double-left"></i></a>
+                            <a href="@link?page=@ViewBag.Prev"><i class="fa fa-angle-double-right"></i></a>
+                        }
+                        @for (int i = startPage; i <= endPage; i++)
+                        {
+                            if (currentPage == i)
+                            {
+                                <a href="@link?page=@i" class="current-page">@i</a>
+                            }
+                            else
+                            {
+                                <a href="@link?page=@i">@i</a>
+                            }
+                        }
+                        @if (currentPage < totalPage)
+                        {
+                            <a href="@link?page=@ViewBag.Next"><i class="fa fa-angle-double-left"></i></a>
+                            <a href="@link?page=@ViewBag.Last"><i class="fa fa-angle-double-right"></i></a>
+                        }
+                    </div>
+                }
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-8">
+                <div class="product__sidebar">
+                    <div class="product__sidebar__view">
+                        <div class="section-title">
+                            <h5>Top Hot</h5>
+                        </div>
+                        <div class="filter__gallery">
+                            @foreach (var item in listTopHot)
+                            {
+                                var url = "/detail/" + item.MetaTitle + "-" + item.ID;
+                                <div class="product__sidebar__view__item set-bg mix day years"
+                                     data-setbg="@item.ImageUrl">
+                                    <div class="ep">@item.Quantity</div>
+                                    <h5><a href="@url">@item.Name</a></h5>
+                                </div>
+                            }                          
+                        </div>
+                    </div>                   
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,218 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var slide = (List<EasyTicket.Connection.EF.Slide>)ViewBag.Slides;
+    var listTrendTicket = (List<EasyTicket.Connection.EF.Ticket>)ViewBag.TicketTrend;
+    var listTopTicket = (List<EasyTicket.Connection.EF.Ticket>)ViewBag.TicketTopHot;
+    var listMovie = (List<EasyTicket.Connection.EF.Ticket>)ViewBag.TicketMovie;
+    var listMusic = (List<EasyTicket.Connection.EF.Ticket>)ViewBag.TicketMusic;
+    var listDrama = (List<EasyTicket.Connection.EF.Ticket>)ViewBag.TicketDrama;
+    var listSport = (List<EasyTicket.Connection.EF.Ticket>)ViewBag.TicketSport;
+}
+
+<section class="hero">
+    <div class="container">
+        <div class="hero__slider owl-carousel">
+            @foreach (var item in slide)
+            {
+                <div class="hero__items set-bg" data-setbg="@item.Image">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="hero__text">
+                                <h2>@item.Link</h2>
+                                <p>@item.Description</p>
+                                <a href="#"><span>Buy Now</span> <i class="fa fa-angle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="trending__product">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            <div class="section-title">
+                                <h4>Trending Now</h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="btn__all">
+                                <a href="/product" class="primary-btn">View All <span class="arrow_right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach (var item in listTrendTicket)
+                        {
+                            var url = "/detail/" + item.MetaTitle + "-" + item.ID;
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="@item.ImageUrl">
+                                        <div class="ep">@item.Quantity</div>
+                                        <div class="comment"> @item.Price$</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h5><a href="@url">@item.Name</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="popular__product">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            <div class="section-title">
+                                <h4>Movie</h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="btn__all">
+                                <a href="/product/movie-1" class="primary-btn">View All <span class="arrow_right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach (var item in listMovie)
+                        {
+                            var url = "/detail/" + item.MetaTitle + "-" + item.ID;
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="@item.ImageUrl">
+                                        <div class="ep">@item.Quantity</div>
+                                        <div class="comment">$@item.Price</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h5><a href="@url">@item.Name</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="recent__product">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            <div class="section-title">
+                                <h4>Music</h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="btn__all">
+                                <a href="/product/music-2" class="primary-btn">View All <span class="arrow_right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach (var item in listMusic)
+                        {
+                            var url = "/detail/" + item.MetaTitle + "-" + item.ID;
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="@item.ImageUrl">
+                                        <div class="ep">@item.Quantity</div>
+                                        <div class="comment">$@item.Price</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h5><a href="@url">@item.Name</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="live__product">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            <div class="section-title">
+                                <h4>Sport</h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="btn__all">
+                                <a href="/product/sport-4" class="primary-btn">View All <span class="arrow_right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach (var item in listSport)
+                        {
+                            var url = "/detail/" + item.MetaTitle + "-" + item.ID;
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="@item.ImageUrl">
+                                        <div class="ep">@item.Quantity</div>
+                                        <div class="comment">$@item.Price</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h5><a href="@url">@item.Name</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="live__product">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            <div class="section-title">
+                                <h4>Drama</h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="btn__all">
+                                <a href="/product/drama-3" class="primary-btn">View All <span class="arrow_right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach (var item in listDrama)
+                        {
+                            var url = "/detail/" + item.MetaTitle + "-" + item.ID;
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="@item.ImageUrl">
+                                        <div class="ep">@item.Quantity</div>
+                                        <div class="comment">$@item.Price</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h5><a href="@url">@item.Name</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-8">
+                <div class="product__sidebar">
+                    <div class="product__sidebar__view">
+                        <div class="section-title">
+                            <h5>Top Hot</h5>
+                        </div>
+                        <div class="filter__gallery">
+                            @foreach (var item in listTopTicket)
+                            {
+                                var url = "/detail/" + item.MetaTitle + "-" + item.ID;
+                                <div class="product__sidebar__view__item set-bg mix day years"
+                                     data-setbg="@item.ImageUrl">
+                                    <div class="ep">@item.Quantity</div>
+                                    <h5><a href="@url">@item.Name</a></h5>
+                                </div>
+                            }
+                        </div>
+                    </div>                   
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

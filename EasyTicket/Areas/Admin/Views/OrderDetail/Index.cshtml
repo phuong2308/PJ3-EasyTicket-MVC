@@ -1,0 +1,37 @@
+﻿@model PagedList.IPagedList<EasyTicket.Connection.EF.OrderDetail>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+
+<div class="col-lg-12 stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Order Detail List</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>OrderID</th>
+                        <th>TicketID</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.OrderID</td>
+                            <td>@item.TicketID</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Price per Unit</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        </div>
+    </div>
+</div>
+

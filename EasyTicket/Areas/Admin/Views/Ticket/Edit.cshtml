@@ -1,0 +1,82 @@
+﻿@model EasyTicket.Connection.EF.Ticket
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Create New Ticket</h4>
+            <p class="card-description">Create New Ticket</p>
+            @using (Html.BeginForm("Edit", "Ticket", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, new { @for = "exampleInputName1" })
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @id = "exampleInputName1", @placeholder = "Name" })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MetaTitle, new { @for = "exampleInputName1" })
+                    @Html.TextBoxFor(model => model.MetaTitle, new { @class = "form-control", @id = "exampleInputName1", @placeholder = "MetaTitle" })
+                    @Html.ValidationMessageFor(model => model.MetaTitle, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, new { @for = "exampleInputName1" })
+                    @Html.TextBoxFor(model => model.Description, new { @class = "form-control", @id = "exampleInputName1", @placeholder = "Description" })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Price, new { @for = "exampleInputName1" })
+                    @Html.TextBoxFor(model => model.Price, new { @class = "form-control", @id = "exampleInputName1", @placeholder = "Price" })
+                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Quantity, new { @for = "exampleInputName1" })
+                    @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control", @id = "exampleInputName1", @placeholder = "Quantity" })
+                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CategoryID)
+                    @Html.DropDownListFor(model => model.CategoryID, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.WatchDate)
+                    @Html.TextBoxFor(model => model.WatchDate, new { @class = "form-control", @type = "date" })
+                    @Html.ValidationMessageFor(model => model.WatchDate, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NextViewingDate)
+                    @Html.TextBoxFor(model => model.NextViewingDate, new { @class = "form-control", @type = "date" })
+                    @Html.ValidationMessageFor(model => model.NextViewingDate, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Artist, new { @for = "exampleInputName1" })
+                    @Html.TextBoxFor(model => model.Artist, new { @class = "form-control", @id = "exampleInputName1", @placeholder = "Artist" })
+                    @Html.ValidationMessageFor(model => model.Artist, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ImageUrl)
+                    <input type="file" name="img[]" class="file-upload-default">
+                    <div class="input-group col-xs-12">
+                        <span class="input-group-append">
+                            <input class="file-upload-browse btn" name="ImageFile" type="file">
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ShowOnHome, new { @for = "exampleInputName1" })
+                    @Html.CheckBoxFor(model => model.ShowOnHome, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ShowOnHome, "", new { @class = "text-danger" })
+                </div>
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <button class="btn btn-light">Cancel</button>
+            }
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+﻿@model EasyTicket.Connection.EF.User
+
+@{
+    ViewBag.Title = "Create User";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Create New User</h4>
+            <p class="card-description">Create New User</p>
+            @using (Html.BeginForm("Create", "User", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(x => x.UserName, new { @for = "exampleInputName1" })
+                    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", @id = "exampleInputName1", @placeholder = "UserName" })
+                    @Html.ValidationMessageFor(x => x.UserName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Password, new { @for = "exampleInputPassword4" })
+                    @Html.PasswordFor(x => x.Password, new { @class = "form-control", @id = "exampleInputPassword4", @placeholder = "Password" })
+                    @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Name, new { @for = "exampleInputName1" })
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @id = "exampleInputName1", @placeholder = "Name" })
+                    @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Email, new { @for = "exampleInputName1" })
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @id = "exampleInputName1", @placeholder = "Email" })
+                    @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.GroupID, new { @for = "exampleInputName1" })
+                    @Html.DropDownListFor(x => x.GroupID, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.GroupID, "", new { @class = "text-danger" })
+                </div>
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <button class="btn btn-light">Cancel</button>
+            }
+        </div>
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+﻿@model List<EasyTicket.Connection.EF.Category>
+
+<div class="col-lg-8">
+    <div class="header__nav">
+        <nav class="header__menu mobile-menu">
+            <ul>
+                <li><a href="/">Homepage</a></li>
+                <li>
+                    <a href="#">Categories <span class="arrow_carrot-down"></span></a>
+                    <ul class="dropdown">
+                        @foreach (var item in Model)
+                        {
+                            <li><a href="/product/@item.MetaTitle-@item.ID">@item.Name</a></li>
+                        }
+                    </ul>
+                </li>
+                <li><a href="/faq">FAQ</a></li>
+                <li><a href="/contact">Contacts</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

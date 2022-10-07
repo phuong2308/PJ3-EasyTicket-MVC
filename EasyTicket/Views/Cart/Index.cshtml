@@ -1,0 +1,85 @@
+﻿@model List<EasyTicket.Models.CartItem>
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section jsFooter{
+    <script src="/Assets/Client/js/controller/cartController.js"></script>
+}
+@if (Model.Count > 0)
+{
+    <div class="container spad" style="min-height: 63%;">
+        <div class="col-lg-12">
+            <p style="color: #fff; font-size:xx-large; text-align: center; margin-bottom: 2rem;">My Shopping Cart</p>
+            <table class="table table-borderless product__item__text text-center">
+                <thead>
+                    <!-- <tr style="text-decoration: underline 3px #e53637 solid;"> -->
+                    <tr>
+                        <th scope="col">Ticket</th>
+                        <th scope="col">Price per Unit</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total Price</th>
+                        <th scope="col">Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ 
+                        var total = (decimal)0;
+                    }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <img style="max-height: 8rem;" src="@item.Ticket.ImageUrl" />
+                                    </div>
+                                    <div class="col-auto text-left">
+                                        <p style="font-size: 1.5rem; color: #ffffff">@item.Ticket.Name</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span style="font-weight: bold;">$@item.Ticket.Price.GetValueOrDefault(0)</span></td>
+                            <td><input type="number" class="txtQuantity" id="input-cart" data-id="@item.Ticket.ID" value="@item.Quantity" /></td>
+                            <td><span style="font-size: 1.2rem; font-weight: bolder;">$@((item.Ticket.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0"))</span></td>
+                            <td><a href="#" data-id="@item.Ticket.ID" class="btn-delete"><i class="fa fa-remove"></i></a></td>
+                        </tr>
+                        total += (decimal)(item.Ticket.Price.GetValueOrDefault(0) * item.Quantity);
+                    }
+                </tbody>
+            </table>
+            <div class="card mt-3" style="background-color: #e53637;"></div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="btn-cart mt-3" id="btnContinue" style="background-color: transparent; border: 1px solid #e53637">continue shopping</div>
+                    <div class="btn-cart" id="btnUpdate" style="background-color: transparent; border: 1px solid #e53637">update cart</div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="container" style="border: 1px solid #e53637;border-radius: 0.3rem; background-color: transparent; color: #ffffff; margin-top:1rem; padding: 1rem;">
+                        <div class="row">
+                            <div class="col">
+                                <p style="font-weight: bolder; color:#ffffff; font-size: 1.5rem;">Total</p>
+                                <p style="color:grey">8 tickets</p>
+                            </div>
+                            <div class="col text-center">
+                                <p style="color: #ffffff; font-size: 1.5rem; font-weight: bolder;">$@total</p>
+                            </div>
+                        </div>
+                        <div class="btn-cart" id="btnDeleteAll" style="background-color: transparent; border: 1px solid #e53637">remove all</div>
+                        <div class="btn-cart" id="btnPayment">Check out</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div style="min-height: 63%;">
+        <div class="container text-center p-3 mt-3" style="border:1px solid #e53637; border-radius: 0.5rem">
+            <h2 style="color: #ffffff">There are no products in the cart yet</h2>
+            <div class="btn-cart"><a href="/" style="color: #ffffff">Back to Homepage</a></div>
+        </div>
+    </div>
+}
+
